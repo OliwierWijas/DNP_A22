@@ -1,0 +1,85 @@
+﻿@page "/Statistics"
+@using Blazor.Services
+@using global::Shared
+@inject IGradeService gradeService
+<h3>Statistics</h3>
+
+<div>
+    <label>Course Code:</label>
+    <input type="text" @bind="courseCode"/>
+</div>
+
+
+<div>
+    <label for="check1">Include total number of students </label>
+    <input type="checkbox" id="check1" @onchange="() => check1 = !check1" bind="@check1"/>
+    @if (statistics is not null && check1)
+    {
+        <label> : @statistics.TotalNumberOfStudents</label>
+    }
+</div>
+<div>
+    <label for="check2">Include total number of students passed </label>
+    <input type="checkbox" id="check2" @onchange="() => check2 = !check2" bind="@check2"/>
+    @if (statistics is not null && check2)
+    {
+        <label> : @statistics.TotalNumberOfPassedStudents</label>
+    }
+</div>
+<div>
+    <label for="check3">Include average grade overall </label>
+    <input type="checkbox" id="check3" @onchange="() => check3 = !check3" bind="@check3"/>
+    @if (statistics is not null && check3)
+    {
+        <label> : @statistics.AvgGradeOverall</label>
+    }
+</div>
+<div>
+    <label for="check4">Include average grade of passed students </label>
+    <input type="checkbox" id="check4"  @onchange="() => check4 = !check4" bind="@check4"/>
+    @if (statistics is not null && check4)
+    {
+        <label> : @statistics.AvgGradeOfPassed</label>
+    }
+</div>
+<div>
+    <label for="check5">Include median grade </label>
+    <input type="checkbox" id="check5" @onchange="() => check5 = !check5" bind="@check5"/>
+    @if (statistics is not null && check5)
+    {
+        <label> : @statistics.MedianGrade</label>
+    }
+</div>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <label style="color: red">@message</label>
+}
+
+<button @onclick="SearchAsync">Search</button>
+
+@code {
+    private string courseCode = "";
+    private bool check1 = false;
+    private bool check2 = false;
+    private bool check3 = false;
+    private bool check4 = false;
+    private bool check5 = false;
+    private StatisticsOverviewDto statistics = null;
+    
+    private string message = "";
+    
+    private async Task SearchAsync()
+    {
+        message = "";
+        try
+        {
+            statistics = await gradeService.GetCourseStatisticsAsync(courseCode);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            message = e.Message;
+        }
+    }
+}

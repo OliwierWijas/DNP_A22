@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{BD99C5B3-C3D8-4E0F-88ED-82CEDE89702A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{6907541D-F48B-4125-B84D-BDF72229D2C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor", "Blazor\Blazor.csproj", "{6EF9D45F-36FD-42C3-8242-248278F6E358}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD99C5B3-C3D8-4E0F-88ED-82CEDE89702A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD99C5B3-C3D8-4E0F-88ED-82CEDE89702A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD99C5B3-C3D8-4E0F-88ED-82CEDE89702A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD99C5B3-C3D8-4E0F-88ED-82CEDE89702A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6907541D-F48B-4125-B84D-BDF72229D2C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6907541D-F48B-4125-B84D-BDF72229D2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6907541D-F48B-4125-B84D-BDF72229D2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6907541D-F48B-4125-B84D-BDF72229D2C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF9D45F-36FD-42C3-8242-248278F6E358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF9D45F-36FD-42C3-8242-248278F6E358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF9D45F-36FD-42C3-8242-248278F6E358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF9D45F-36FD-42C3-8242-248278F6E358}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,90 @@
+﻿@page "/AddGrade"
+@using global::Shared
+@using Blazor.Services
+@inject IStudentService studentService
+<h3>AddGrade</h3>
+
+<div>
+    <label>Course code:</label>
+    <input type="text" @bind="CourseCode"/>
+</div>
+<div>
+    <label>Grade:</label>
+    <select @bind="Grade">
+        <option>Choose</option>
+        <option value="-3">-3</option>
+        <option value="0">00</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="7">7</option>
+        <option value="10">10</option>
+        <option value="12">12</option>
+    </select>
+</div>
+@if (Students is null)
+{
+    <label>Loading students...</label>
+}
+else if (!Students.Any())
+{
+    <label>No students in the system. Grade cannot be added.</label>
+}
+else
+{
+    <div>
+        <label>Student:</label>
+        <select @bind="StudentId">
+            <option>Choose</option>
+            @foreach (Student student in Students)
+            {
+                <option value="@student.Id">@student.Name</option>
+            }
+        </select>
+    </div>
+}
+@if (!string.IsNullOrEmpty(message))
+{
+    <label style="color: red">@message</label>
+}
+<button @onclick="CreateAsync">Create</button>
+
+@code {
+    private int StudentId = 0;
+    private Student Student = null;
+    private string CourseCode = "";
+    private int Grade = 0;
+    private IEnumerable<Student> Students = null;
+
+    private string message = "";
+    
+    protected override async Task OnInitializedAsync()
+    {
+        message = "";
+        try
+        {
+            Students = await studentService.GetAllStudentsAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            message = e.Message;
+        }
+    }
+    
+    private async Task CreateAsync()
+    {
+        message = "";
+        try
+        {
+            Student = Students.FirstOrDefault(s => s.Id == StudentId)!;
+            Grade grade = new Grade(CourseCode, Grade, Student);
+            await studentService.AddGradeToStudentAsync(grade);
+            message = "Grade has been successfully added.";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            message = e.Message;
+        }
+    }
+}
